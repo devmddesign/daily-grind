@@ -881,6 +881,75 @@ p {
 }
 
 /* ============================================================
+   PRODUCERS SECTION
+   ============================================================ */
+
+.producers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.producer-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
+  cursor: default;
+}
+
+.producer-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.producer-card:hover img { transform: scale(1.04); }
+
+.producer-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,15,8,0.88) 0%, rgba(26,15,8,0.2) 55%, rgba(26,15,8,0.05) 100%);
+}
+
+.producer-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 36px 32px;
+  color: var(--color-cream);
+}
+
+.producer-card-region {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246,241,232,0.45);
+  margin-bottom: 10px;
+}
+
+.producer-card-name {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: var(--fw-light);
+  line-height: 1.1;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 14px;
+}
+
+.producer-card-notes {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: var(--fw-light);
+  line-height: 1.7;
+  color: rgba(246,241,232,0.6);
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -894,6 +963,8 @@ p {
   .stats-grid { grid-template-columns: 1fr; }
   .community-grid { grid-template-columns: 1fr; }
   .icon-grid { grid-template-columns: repeat(4, 1fr); }
+  .producers-grid { grid-template-columns: 1fr; }
+  .producer-card { min-height: 320px; }
 }
 
 @media (max-width: 600px) {
@@ -1009,7 +1080,7 @@ p {
       <p class="reveal reveal-d1" style="font-size: 15px; font-weight: 300; line-height: 1.75; opacity: 0.7; margin-bottom: 36px; max-width: 440px;">
         We partner directly with small farms across Ethiopia, Colombia, and Guatemala, building relationships that go beyond the harvest.
       </p>
-      <button class="btn-ghost reveal reveal-d2" onclick="showPage('about')">meet our producers</button>
+      <button class="btn-ghost reveal reveal-d2" onclick="showPage('about'); setTimeout(() => document.getElementById('producers').scrollIntoView({behavior:'smooth'}), 80)">meet our producers</button>
     </div>
   </section>
 
@@ -1130,6 +1201,56 @@ p {
     </div>
   </div>
 
+  <!-- Farm Partners -->
+  <section id="producers" class="section" style="padding-top: clamp(64px, 8vw, 120px);">
+    <div class="eyebrow reveal">Our producers</div>
+    <h2 class="reveal reveal-d1" style="margin-bottom: 12px;">12 farm partners.<br /><em style="font-style:italic">Three regions.</em></h2>
+    <p class="reveal reveal-d2" style="font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--fg-muted); max-width: 520px; margin-bottom: 48px;">
+      Every coffee on our menu traces back to a named farm. We visit each partner personally, pay above fair-trade prices, and carry that story all the way to your cup.
+    </p>
+    <div class="producers-grid">
+      <div class="producer-card reveal">
+        <img
+          src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=85"
+          alt="Coffee farm in Ethiopia"
+          loading="lazy"
+        />
+        <div class="producer-card-overlay"></div>
+        <div class="producer-card-content">
+          <div class="producer-card-region">East Africa</div>
+          <div class="producer-card-name">Yirgacheffe,<br />Ethiopia</div>
+          <div class="producer-card-notes">Bright, floral, stone fruit.<br />Washed process. 1,800m altitude.</div>
+        </div>
+      </div>
+      <div class="producer-card reveal reveal-d1">
+        <img
+          src="https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?auto=format&fit=crop&w=800&q=85"
+          alt="Coffee farm in Colombia"
+          loading="lazy"
+        />
+        <div class="producer-card-overlay"></div>
+        <div class="producer-card-content">
+          <div class="producer-card-region">South America</div>
+          <div class="producer-card-name">Huila,<br />Colombia</div>
+          <div class="producer-card-notes">Balanced, caramel, red berry.<br />Honey process. 1,600m altitude.</div>
+        </div>
+      </div>
+      <div class="producer-card reveal reveal-d2">
+        <img
+          src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=800&q=85"
+          alt="Coffee farm in Guatemala"
+          loading="lazy"
+        />
+        <div class="producer-card-overlay"></div>
+        <div class="producer-card-content">
+          <div class="producer-card-region">Central America</div>
+          <div class="producer-card-name">Antigua,<br />Guatemala</div>
+          <div class="producer-card-notes">Rich, dark chocolate, walnut.<br />Natural process. 1,500m altitude.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Story split -->
   <section class="story-grid" style="min-height: 65vh;">
     <div class="story-text" style="padding: clamp(40px, 6vw, 96px);">
@@ -1246,7 +1367,7 @@ p {
       <p class="reveal reveal-d1" style="font-size: 15px; font-weight: 300; line-height: 1.75; opacity: 0.72; margin-bottom: 36px; max-width: 440px;">
         Every bag we source is traceable to a single farm. We visit our partners, pay above fair-trade prices, and share the story of each harvest with you.
       </p>
-      <button class="btn-ghost reveal reveal-d2" onclick="showPage('menu')">explore our origins</button>
+      <button class="btn-ghost reveal reveal-d2" onclick="showPage('community')">explore the origin series</button>
     </div>
   </section>
 
